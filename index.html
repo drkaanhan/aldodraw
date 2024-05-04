@@ -105,7 +105,7 @@
             max-width: 200px;
             text-align: center;
         }
-        
+
         .image img {
             max-width: 200px;
             width: 100%;
@@ -119,10 +119,11 @@
             <a href="https://aldomilyar.vip/"><img src="./assets/tapps.png" alt="logo of telegram web apps"></a>
             <h2>200 Kişiye 300$ Çekilişi</h2>
             <p>Merhaba devteamslo,</p>
-            <p>Çekilişe katılmak için resimde gördüğünüz sayıyı seç.</p>
+            <p>Çekilişe katılmak için resimde gördüğün sayıyı seç.</p>
 
             <div class="image">
-                <img  src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bundesstra%C3%9Fe_44_number.svg/2000px-Bundesstra%C3%9Fe_44_number.svg.png" alt="" srcset="">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Bundesstra%C3%9Fe_44_number.svg/2000px-Bundesstra%C3%9Fe_44_number.svg.png"
+                    alt="" srcset="">
             </div>
 
             <div class="options">
@@ -152,13 +153,12 @@
         // Init TWA
         Telegram.WebApp.ready();
 
-        var initData = Telegram.WebAppUser;
-        console.log("user", initData);
 
 
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
         Telegram.WebApp.onEvent('themeChanged', function () {
             document.documentElement.className = Telegram.WebApp.colorScheme;
+
         });
 
         // Show main button
@@ -190,7 +190,7 @@
 
         function enableMainButton() {
             Telegram.WebApp.MainButton.enable();
-        } 
+        }
 
         function disableMainButton() {
             Telegram.WebApp.MainButton.hide();
@@ -203,6 +203,10 @@
 
             var expandEl = document.querySelector('#viewport-params-expand');
             expandEl.innerText = 'Is Expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false');
+
+
+            var initData = Telegram.WebAppUser;
+            console.log("user", initData);
         }
 
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
