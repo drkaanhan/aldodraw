@@ -118,7 +118,7 @@
         <div class="container">
             <a href="https://aldomilyar.vip/"><img src="./assets/tapps.png" alt="logo of telegram web apps"></a>
             <h2>200 Kişiye 300$ Çekilişi</h2>
-            <p>Merhaba devteamslo,</p>
+            <p>Merhaba <span id="username"></span>,</p>
             <p>Çekilişe katılmak için resimde gördüğün sayıyı seç.</p>
 
             <div class="image">
@@ -127,10 +127,10 @@
             </div>
 
             <div class="options">
-                <button class="option" onclick="enableMainButton()">19</button>
-                <button class="option" onclick="enableMainButton()">23</button>
-                <button class="option" onclick="enableMainButton()">36</button>
-                <button class="option" onclick="enableMainButton()">44</button>
+                <button class="option" onclick="enableMainButton(19)">19</button>
+                <button class="option" onclick="enableMainButton(23)">23</button>
+                <button class="option" onclick="enableMainButton(36)">36</button>
+                <button class="option" onclick="enableMainButton(44)">44</button>
             </div>
         </div>
     </main>
@@ -138,7 +138,7 @@
     <div id="viewport-params-size"></div>
     <div id="viewport-params-expand"></div>
     <script>
-        const options = document.querySelectorAll('.option');
+        var options = document.querySelectorAll('.option');
 
         options.forEach(option => {
             option.addEventListener('click', () => {
@@ -188,8 +188,10 @@
             });
         };
 
-        function enableMainButton() {
-            Telegram.WebApp.MainButton.enable();
+        function enableMainButton(value) {
+            if(value == 44) {
+                Telegram.WebApp.MainButton.enable();
+            }
         }
 
         function disableMainButton() {
@@ -206,7 +208,29 @@
 
 
             var initData = Telegram.WebApp.initData;
-            console.log("user : ", initData);
+            var queryParams = parseQueryString(initData);
+
+            var userDataString = decodeURIComponent(queryParams.user);
+            var userData = JSON.parse(userDataString);
+
+            var id = userData.id;
+            var firstName = userData.first_name;
+            var lastName = userData.last_name;
+            var username = userData.username;
+            document.getElementById('username').innerHTML = firstName + " " + lastName;
+        }
+
+        function parseQueryString(queryString) {
+            var params = {};
+            var queryStringWithoutQuestionMark = queryString.substring(1);
+            var queryParts = queryStringWithoutQuestionMark.split("&");
+            queryParts.forEach(part => {
+                var keyValue = part.split("=");
+                var key = decodeURIComponent(keyValue[0]);
+                var value = decodeURIComponent(keyValue[1]);
+                params[key] = value;
+            });
+            return params;
         }
 
         Telegram.WebApp.setHeaderColor('secondary_bg_color');
