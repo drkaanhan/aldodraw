@@ -126,10 +126,10 @@
             </div>
 
             <div class="options">
-                <button class="option" click="enableMainButton()">19</button>
-                <button class="option" click="enableMainButton()">23</button>
-                <button class="option" click="enableMainButton()">36</button>
-                <button class="option" click="enableMainButton()">44</button>
+                <button class="option" onclick="enableMainButton()">19</button>
+                <button class="option" onclick="enableMainButton()">23</button>
+                <button class="option" onclick="enableMainButton()">36</button>
+                <button class="option" onclick="enableMainButton()">44</button>
             </div>
         </div>
     </main>
@@ -152,8 +152,8 @@
         // Init TWA
         Telegram.WebApp.ready();
 
-        var initData = Telegram.WebAppInitData;
-        console.log(initData);
+        var initData = Telegram.WebAppUser;
+        console.log("user", initData);
 
 
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
