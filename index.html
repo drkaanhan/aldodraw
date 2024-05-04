@@ -167,7 +167,9 @@
         });
         Telegram.WebApp.MainButton.onClick(function () {
             disableMainButton();
-            Telegram.WebApp.showAlert('Başarıyla çekilişe katıldınız, bol şanslar.')
+            Telegram.WebApp.showAlert('Başarıyla çekilişe katıldınız, bol şanslar.', function() {
+                Telegram.WebApp.close();
+            })
         });
         Telegram.WebApp.MainButton.show();
         Telegram.WebApp.MainButton.disable();
