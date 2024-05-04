@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Telegram Mini Apps Vanilla JS Sample App</title>
+    <title>Aldo Çekiliş</title>
     <style>
         body {
             --bg-color: var(--tg-theme-bg-color);
-            font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
+            font: 16px/18px Helvetica, Arial, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--tg-theme-text-color);
             margin: 48px 24px;
@@ -19,7 +21,9 @@
         a {
             color: var(--tg-theme-link-color);
         }
+
         #viewport {
+            display: none;
             position: fixed;
             left: 0;
             right: 0;
@@ -28,6 +32,7 @@
             pointer-events: none;
             transition: all .2s ease;
         }
+
         #viewport:after {
             content: '';
             display: block;
@@ -43,9 +48,9 @@
 
         #viewport-params-size,
         #viewport-params-expand {
+            display: none;
             content: attr(text);
             position: absolute;
-            display: inline-block;
             background: var(--tg-theme-link-color, rgb(64, 224, 208));
             right: 4px;
             left: auto;
@@ -53,11 +58,123 @@
             padding: 4px;
             vertical-align: top;
         }
+
         #viewport-params-size {
             top: 4px;
         }
+
         #viewport-params-expand {
             top: 30px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition-duration: 0.001s !important;
+            }
+        }
+
+        .container::after {
+            opacity: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: block;
+            content: ' ';
+            background: linear-gradient(100deg, #402, #006);
+            padding: 2em;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 55'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23fff' stroke-width='7' opacity='.1'%3E%3Cpath d='M-345 34.5s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 48.3 0 48.3s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 20.7s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 34.5 0 34.5s115-13.8 115-13.8S172.5 6.9 230 6.9s115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8m-920 27.6s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 62.1 0 62.1s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 6.9s57.5-13.8 115-13.8S-115 6.9-115 6.9-57.5 20.7 0 20.7 115 6.9 115 6.9 172.5-6.9 230-6.9 345 6.9 345 6.9s57.5 13.8 115 13.8S575 6.9 575 6.9'/%3E%3Cpath d='M-345-6.9s57.5-13.8 115-13.8S-115-6.9-115-6.9-57.5 6.9 0 6.9 115-6.9 115-6.9s57.5-13.8 115-13.8S345-6.9 345-6.9 402.5 6.9 460 6.9 575-6.9 575-6.9m-920 69s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 75.9 0 75.9s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3C/g%3E%3C/svg%3E%0A"), linear-gradient(80deg, #202, #006);
+            background-position: 50% 50%;
+            animation: background-move 10s linear infinite;
+            background-size: 100vw auto, 100% 100%;
+            background-size: max(100vw, 30em) auto, 100% 100%;
+        }
+        
+
+        @keyframes background-move {
+            0% {
+                background-position: 0 0, 0 0;
+            }
+
+            100% {
+                background-position: 100vw 0, 0 0;
+                background-position: max(100vw, 40em) 0, 0 0;
+            }
+        }
+
+        .container {
+            margin-top: 2rem;
+        }
+
+        .input-group {
+            width: 100%;
+            max-width: 20em;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        @supports (mix-blend-mode: darken) {
+            .input-group {
+                position: relative;
+                mix-blend-mode: lighten;
+            }
+
+            .input-group__label {
+                position: absolute;
+                left: 2em;
+                top: -0.28em;
+                background: #fff;
+            }
+        }
+
+        .input-group__label {
+            padding: 0 0.5em;
+            margin-bottom: 0.5em;
+            text-transform: uppercase;
+            font-size: 1em;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            color: #000;
+            color: rgba(0, 0, 0, 0.6);
+            cursor: pointer;
+        }
+
+        .input-group__input {
+            color: #000;
+            font-size: 1.25rem;
+            line-height: 1;
+            border-style: none;
+            outline: none;
+            height: calc(1em + 1.6em + 0.5em);
+            width: 100%;
+            padding: 0.8em 1em;
+            border: 0.25em solid transparent;
+            background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(120deg, #f09 0%, #0ff 50%, #9f0 100%);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            border-radius: 1.8em;
+            background-size: 200% 100%;
+            transition: background-position 0.8s ease-out;
+        }
+
+        .input-group__input:hover {
+            background-position: 100% 0;
+        }
+
+        .input-group__input:focus {
+            outline: 2px dashed #ad2b89;
+            outline-offset: 0.5em;
         }
     </style>
 </head>
@@ -65,28 +182,21 @@
 <body>
     <main>
         <div align="center">
-            <a href="https://ton.org/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
+            <a href="https://aldomilyar.vip/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
         </div>
-        <h1>Modals</h1>
-        <button onclick="Telegram.WebApp.showAlert('Hello World!');">Launch Alert</button>
-        <button onclick="showPopup();">Launch Popup</button>
+        <h1>200 Kişiye 300$ Çekilişi</h1>
 
-        <h1>Links</h1>
-        <ul>
-            <li>
-                <a href="javascript:Telegram.WebApp.openTelegramLink('https://t.me/trendingapps');">Open link within Telegram</a>
-            </li>
-            <li>
-                <a href="javascript:Telegram.WebApp.openLink('https://ton.org/');">Open link in external browser</a>
-            </li>
-            <li>
-                <a href="javascript:Telegram.WebApp.openLink('https://telegra.ph/api',{try_instant_view:true});">Open link inside Telegram webview</a>
-            </li>
-        </ul>
+        <p>Merhaba devteamslo,</p>
 
-        <h1>Buttons</h1>
-        <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
-        <button onclick="toggleMainButton();">Toggle Main Button</button>
+        <p>Çekilişe katılmak için lütfen aşağıdaki güvenlik sorusunu yanıtlayın.</p>
+
+
+        <div class="container">
+            <div class="input-group">
+                <label class="input-group__label" for="myInput">6 - 2 = ?</label>
+                <input type="text" id="myInput" class="input-group__input" placeholder="Yanıtınızı buraya yazın" />
+            </div>
+        </div>
     </main>
     <div id="viewport"></div>
     <div id="viewport-params-size"></div>
@@ -97,31 +207,31 @@
         Telegram.WebApp.ready();
 
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
-        Telegram.WebApp.onEvent('themeChanged', function() {
+        Telegram.WebApp.onEvent('themeChanged', function () {
             document.documentElement.className = Telegram.WebApp.colorScheme;
         });
 
         // Show main button
         Telegram.WebApp.MainButton.setParams({
-            text: 'Main Button'
+            text: 'Çekilişe Katıl'
         });
         Telegram.WebApp.MainButton.onClick(function () {
             Telegram.WebApp.showAlert('Main Button was clicked')
-        });	
+        });
         Telegram.WebApp.MainButton.show();
 
         // Function to call showPopup API
         function showPopup() {
             Telegram.WebApp.showPopup({
-                title: 'Title',
-                message: 'Some message',
+                title: 'Çekiliş',
+                message: '200 Kişiye 300 $',
                 buttons: [
-                    {id: 'link', type: 'default', text: 'Open ton.org'},
-                    {type: 'cancel'},
+                    { id: 'link', type: 'default', text: 'Open aldomilyar.vip' },
+                    { type: 'cancel' },
                 ]
-            }, function(btn) {
+            }, function (btn) {
                 if (btn === 'link') {
-                    Telegram.WebApp.openLink('https://ton.org/');
+                    Telegram.WebApp.openLink('https://aldomilyar.vip/');
                 }
             });
         };
@@ -137,7 +247,7 @@
 
         function setViewportData() {
             var sizeEl = document.getElementById('viewport-params-size');
-            sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' + 
+            sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' +
                 'height: ' + Telegram.WebApp.viewportStableHeight;
 
             var expandEl = document.querySelector('#viewport-params-expand');
@@ -149,7 +259,7 @@
         setViewportData();
         Telegram.WebApp.onEvent('viewportChanged', setViewportData);
 
-        Telegram.WebApp.onEvent('themeChanged', function() {
+        Telegram.WebApp.onEvent('themeChanged', function () {
             document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
         });
 
@@ -159,4 +269,5 @@
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
 </body>
+
 </html>
