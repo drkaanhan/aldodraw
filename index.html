@@ -155,6 +155,7 @@
         var initData = Telegram.WebAppInitData;
         console.log(initData);
 
+
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
         Telegram.WebApp.onEvent('themeChanged', function () {
             document.documentElement.className = Telegram.WebApp.colorScheme;
@@ -168,7 +169,8 @@
             disableMainButton();
             Telegram.WebApp.showAlert('Başarıyla çekilişe katıldınız, bol şanslar.')
         });
-        Telegram.WebApp.MainButton.hide();
+        Telegram.WebApp.MainButton.show();
+        Telegram.WebApp.MainButton.disable();
 
         // Function to call showPopup API
         function showPopup() {
