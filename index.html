@@ -67,144 +67,65 @@
             top: 30px;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation: none !important;
-                transition-duration: 0.001s !important;
-            }
-        }
-
-        .container::after {
-            opacity: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            display: block;
-            content: ' ';
-            background: linear-gradient(100deg, #402, #006);
-            padding: 2em;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 460 55'%3E%3Cg fill='none' fill-rule='evenodd' stroke='%23fff' stroke-width='7' opacity='.1'%3E%3Cpath d='M-345 34.5s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 48.3 0 48.3s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 20.7s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 34.5 0 34.5s115-13.8 115-13.8S172.5 6.9 230 6.9s115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8m-920 27.6s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 62.1 0 62.1s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3Cpath d='M-345 6.9s57.5-13.8 115-13.8S-115 6.9-115 6.9-57.5 20.7 0 20.7 115 6.9 115 6.9 172.5-6.9 230-6.9 345 6.9 345 6.9s57.5 13.8 115 13.8S575 6.9 575 6.9'/%3E%3Cpath d='M-345-6.9s57.5-13.8 115-13.8S-115-6.9-115-6.9-57.5 6.9 0 6.9 115-6.9 115-6.9s57.5-13.8 115-13.8S345-6.9 345-6.9 402.5 6.9 460 6.9 575-6.9 575-6.9m-920 69s57.5-13.8 115-13.8 115 13.8 115 13.8S-57.5 75.9 0 75.9s115-13.8 115-13.8 57.5-13.8 115-13.8 115 13.8 115 13.8 57.5 13.8 115 13.8 115-13.8 115-13.8'/%3E%3C/g%3E%3C/svg%3E%0A"), linear-gradient(80deg, #202, #006);
-            background-position: 50% 50%;
-            animation: background-move 10s linear infinite;
-            background-size: 100vw auto, 100% 100%;
-            background-size: max(100vw, 30em) auto, 100% 100%;
-        }
-        
-
-        @keyframes background-move {
-            0% {
-                background-position: 0 0, 0 0;
-            }
-
-            100% {
-                background-position: 100vw 0, 0 0;
-                background-position: max(100vw, 40em) 0, 0 0;
-            }
-        }
-
         .container {
-            margin-top: 2rem;
+            text-align: center;
         }
 
-        .input-group {
-            width: 100%;
-            max-width: 20em;
-            display: flex;
-            flex-direction: column;
-            z-index: 2;
+        img {
+            width: 48px;
         }
 
-        @supports (mix-blend-mode: darken) {
-            .input-group {
-                position: relative;
-                mix-blend-mode: lighten;
-            }
-
-            .input-group__label {
-                position: absolute;
-                left: 2em;
-                top: -0.28em;
-                background: #fff;
-            }
-        }
-
-        .input-group__label {
-            padding: 0 0.5em;
-            margin-bottom: 0.5em;
-            text-transform: uppercase;
-            font-size: 1em;
-            font-weight: bold;
-            letter-spacing: 0.1em;
-            color: #000;
-            color: rgba(0, 0, 0, 0.6);
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .input-group__input {
-            color: #000;
-            font-size: 1.25rem;
-            line-height: 1;
-            border-style: none;
-            outline: none;
-            height: calc(1em + 1.6em + 0.5em);
-            width: 100%;
-            padding: 0.8em 1em;
-            border: 0.25em solid transparent;
-            background-image: linear-gradient(#ffffff, #ffffff), linear-gradient(120deg, #f09 0%, #0ff 50%, #9f0 100%);
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            border-radius: 1.8em;
-            background-size: 200% 100%;
-            transition: background-position 0.8s ease-out;
-        }
-
-        .input-group__input:hover {
-            background-position: 100% 0;
-        }
-
-        .input-group__input:focus {
-            outline: 2px dashed #ad2b89;
-            outline-offset: 0.5em;
+        button.selected {
+            background-color: #007bff;
+            color: #fff;
         }
     </style>
 </head>
 
 <body>
     <main>
-        <div align="center">
-            <a href="https://aldomilyar.vip/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
-        </div>
-        <h1>200 Kişiye 300$ Çekilişi</h1>
-
-        <p>Merhaba devteamslo,</p>
-
-        <p>Çekilişe katılmak için lütfen aşağıdaki güvenlik sorusunu yanıtlayın.</p>
-
-
         <div class="container">
-            <div class="input-group">
-                <label class="input-group__label" for="myInput">6 - 2 = ?</label>
-                <input type="text" id="myInput" class="input-group__input" placeholder="Yanıtınızı buraya yazın" />
+            <a href="https://aldomilyar.vip/"><img src="./assets/tapps.png" alt="logo of telegram web apps"></a>
+            <h2>200 Kişiye 300$ Çekilişi</h2>
+            <p>Merhaba devteamslo,</p>
+            <p>Çekilişe katılmak için lütfen resimde gördüğünüz sayıyı seçin.</p>
+            <div class="options">
+                <button class="option" click="enableMainButton()">1</button>
+                <button class="option" click="enableMainButton()">2</button>
+                <button class="option" click="enableMainButton()">3</button>
+                <button class="option" click="enableMainButton()">4</button>
             </div>
         </div>
     </main>
     <div id="viewport"></div>
     <div id="viewport-params-size"></div>
     <div id="viewport-params-expand"></div>
+    <script>
+        const options = document.querySelectorAll('.option');
+
+        options.forEach(option => {
+            option.addEventListener('click', () => {
+                options.forEach(o => o.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+    </script>
+
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         // Init TWA
         Telegram.WebApp.ready();
+
+        var initData = Telegram.WebApp.initData;
+        console.log(initData);
 
         // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
         Telegram.WebApp.onEvent('themeChanged', function () {
@@ -235,6 +156,10 @@
                 }
             });
         };
+
+        function enableMainButton() {
+            Telegram.WebApp.MainButton.show();
+        } 
 
         // Function to toggle main TWA button
         function toggleMainButton() {
